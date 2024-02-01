@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43A36F992B6B8E3500D87A30 /* QuantityHealthQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */; };
+		43A36F9B2B6B9B5D00D87A30 /* ObserverQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */; };
+		43A36F9D2B6BA8B400D87A30 /* MedsengerHealthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */; };
+		43A36F9F2B6BAD1800D87A30 /* Error+healthHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F9E2B6BAD1800D87A30 /* Error+healthHandle.swift */; };
+		43A36FA12B6BAF9000D87A30 /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FA02B6BAF9000D87A30 /* Collection+.swift */; };
+		43A36FA52B6BE44000D87A30 /* CategoryHealthQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */; };
+		43A36FA92B6C120500D87A30 /* MedsengerCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */; };
+		43A36FAB2B6C379000D87A30 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FAA2B6C379000D87A30 /* Date+.swift */; };
+		43F63CB32B6A13CF00EB27A8 /* TestHealthKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CB22B6A13CF00EB27A8 /* TestHealthKitApp.swift */; };
+		43F63CB52B6A13CF00EB27A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CB42B6A13CF00EB27A8 /* ContentView.swift */; };
+		43F63CB92B6A13D000EB27A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F63CB82B6A13D000EB27A8 /* Assets.xcassets */; };
+		43F63CBD2B6A13D000EB27A8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F63CBC2B6A13D000EB27A8 /* Preview Assets.xcassets */; };
+		43F63CC42B6A14BD00EB27A8 /* MedsengerQuantityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CC32B6A14BD00EB27A8 /* MedsengerQuantityType.swift */; };
+		43F63CC82B6A157500EB27A8 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CC72B6A157500EB27A8 /* HealthKitService.swift */; };
+		43F63CCA2B6A16BD00EB27A8 /* Annalist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CC92B6A16BD00EB27A8 /* Annalist.swift */; };
+		43F63CCC2B6A1BB300EB27A8 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CCB2B6A1BB300EB27A8 /* UserDefaults+.swift */; };
+		43F63CCE2B6A254B00EB27A8 /* HealthKitRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CCD2B6A254B00EB27A8 /* HealthKitRecord.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityHealthQuery.swift; sourceTree = "<group>"; };
+		43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverQuery.swift; sourceTree = "<group>"; };
+		43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsengerHealthType.swift; sourceTree = "<group>"; };
+		43A36F9E2B6BAD1800D87A30 /* Error+healthHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+healthHandle.swift"; sourceTree = "<group>"; };
+		43A36FA02B6BAF9000D87A30 /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
+		43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHealthQuery.swift; sourceTree = "<group>"; };
+		43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsengerCategoryType.swift; sourceTree = "<group>"; };
+		43A36FAA2B6C379000D87A30 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		43AE6ED42B6C55B2007C284F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		43F63CAF2B6A13CF00EB27A8 /* TestHealthKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHealthKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		43F63CB22B6A13CF00EB27A8 /* TestHealthKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHealthKitApp.swift; sourceTree = "<group>"; };
+		43F63CB42B6A13CF00EB27A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		43F63CB82B6A13D000EB27A8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		43F63CBA2B6A13D000EB27A8 /* TestHealthKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestHealthKit.entitlements; sourceTree = "<group>"; };
+		43F63CBC2B6A13D000EB27A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		43F63CC32B6A14BD00EB27A8 /* MedsengerQuantityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsengerQuantityType.swift; sourceTree = "<group>"; };
+		43F63CC72B6A157500EB27A8 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		43F63CC92B6A16BD00EB27A8 /* Annalist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annalist.swift; sourceTree = "<group>"; };
+		43F63CCB2B6A1BB300EB27A8 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
+		43F63CCD2B6A254B00EB27A8 /* HealthKitRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitRecord.swift; sourceTree = "<group>"; };
+		43F63CCF2B6A471100EB27A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		43F63CAC2B6A13CF00EB27A8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43F63CA62B6A13CF00EB27A8 = {
+			isa = PBXGroup;
+			children = (
+				43AE6ED42B6C55B2007C284F /* README.md */,
+				43F63CB12B6A13CF00EB27A8 /* TestHealthKit */,
+				43F63CB02B6A13CF00EB27A8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43F63CB02B6A13CF00EB27A8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43F63CAF2B6A13CF00EB27A8 /* TestHealthKit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		43F63CB12B6A13CF00EB27A8 /* TestHealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				43F63CCF2B6A471100EB27A8 /* Info.plist */,
+				43F63CB22B6A13CF00EB27A8 /* TestHealthKitApp.swift */,
+				43F63CB42B6A13CF00EB27A8 /* ContentView.swift */,
+				43F63CB82B6A13D000EB27A8 /* Assets.xcassets */,
+				43F63CBA2B6A13D000EB27A8 /* TestHealthKit.entitlements */,
+				43F63CBB2B6A13D000EB27A8 /* Preview Content */,
+				43F63CC32B6A14BD00EB27A8 /* MedsengerQuantityType.swift */,
+				43F63CC72B6A157500EB27A8 /* HealthKitService.swift */,
+				43F63CC92B6A16BD00EB27A8 /* Annalist.swift */,
+				43F63CCB2B6A1BB300EB27A8 /* UserDefaults+.swift */,
+				43F63CCD2B6A254B00EB27A8 /* HealthKitRecord.swift */,
+				43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */,
+				43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */,
+				43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */,
+				43A36F9E2B6BAD1800D87A30 /* Error+healthHandle.swift */,
+				43A36FA02B6BAF9000D87A30 /* Collection+.swift */,
+				43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */,
+				43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */,
+				43A36FAA2B6C379000D87A30 /* Date+.swift */,
+			);
+			path = TestHealthKit;
+			sourceTree = "<group>";
+		};
+		43F63CBB2B6A13D000EB27A8 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				43F63CBC2B6A13D000EB27A8 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		43F63CAE2B6A13CF00EB27A8 /* TestHealthKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43F63CC02B6A13D000EB27A8 /* Build configuration list for PBXNativeTarget "TestHealthKit" */;
+			buildPhases = (
+				43F63CAB2B6A13CF00EB27A8 /* Sources */,
+				43F63CAC2B6A13CF00EB27A8 /* Frameworks */,
+				43F63CAD2B6A13CF00EB27A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TestHealthKit;
+			productName = TestHealthKit;
+			productReference = 43F63CAF2B6A13CF00EB27A8 /* TestHealthKit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43F63CA72B6A13CF00EB27A8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					43F63CAE2B6A13CF00EB27A8 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+				};
+			};
+			buildConfigurationList = 43F63CAA2B6A13CF00EB27A8 /* Build configuration list for PBXProject "TestHealthKit" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 43F63CA62B6A13CF00EB27A8;
+			productRefGroup = 43F63CB02B6A13CF00EB27A8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43F63CAE2B6A13CF00EB27A8 /* TestHealthKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		43F63CAD2B6A13CF00EB27A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F63CBD2B6A13D000EB27A8 /* Preview Assets.xcassets in Resources */,
+				43F63CB92B6A13D000EB27A8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		43F63CAB2B6A13CF00EB27A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43F63CCC2B6A1BB300EB27A8 /* UserDefaults+.swift in Sources */,
+				43F63CB52B6A13CF00EB27A8 /* ContentView.swift in Sources */,
+				43A36FA92B6C120500D87A30 /* MedsengerCategoryType.swift in Sources */,
+				43A36F9D2B6BA8B400D87A30 /* MedsengerHealthType.swift in Sources */,
+				43A36F992B6B8E3500D87A30 /* QuantityHealthQuery.swift in Sources */,
+				43A36F9F2B6BAD1800D87A30 /* Error+healthHandle.swift in Sources */,
+				43F63CC82B6A157500EB27A8 /* HealthKitService.swift in Sources */,
+				43A36FAB2B6C379000D87A30 /* Date+.swift in Sources */,
+				43F63CCE2B6A254B00EB27A8 /* HealthKitRecord.swift in Sources */,
+				43A36F9B2B6B9B5D00D87A30 /* ObserverQuery.swift in Sources */,
+				43F63CC42B6A14BD00EB27A8 /* MedsengerQuantityType.swift in Sources */,
+				43A36FA12B6BAF9000D87A30 /* Collection+.swift in Sources */,
+				43F63CCA2B6A16BD00EB27A8 /* Annalist.swift in Sources */,
+				43A36FA52B6BE44000D87A30 /* CategoryHealthQuery.swift in Sources */,
+				43F63CB32B6A13CF00EB27A8 /* TestHealthKitApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		43F63CBE2B6A13D000EB27A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		43F63CBF2B6A13D000EB27A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		43F63CC12B6A13D000EB27A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TestHealthKit/TestHealthKit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TestHealthKit/Preview Content\"";
+				DEVELOPMENT_TEAM = CRF22TKXX5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TestHealthKit/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "bla bla bla";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Bla bla bla bla";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "bla bla";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.medsenger.TestHealthKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		43F63CC22B6A13D000EB27A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TestHealthKit/TestHealthKit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TestHealthKit/Preview Content\"";
+				DEVELOPMENT_TEAM = CRF22TKXX5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TestHealthKit/Info.plist;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "bla bla bla";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Bla bla bla bla";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "bla bla";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.medsenger.TestHealthKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43F63CAA2B6A13CF00EB27A8 /* Build configuration list for PBXProject "TestHealthKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F63CBE2B6A13D000EB27A8 /* Debug */,
+				43F63CBF2B6A13D000EB27A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43F63CC02B6A13D000EB27A8 /* Build configuration list for PBXNativeTarget "TestHealthKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43F63CC12B6A13D000EB27A8 /* Debug */,
+				43F63CC22B6A13D000EB27A8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43F63CA72B6A13CF00EB27A8 /* Project object */;
+}

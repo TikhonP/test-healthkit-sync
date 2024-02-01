@@ -4,6 +4,8 @@
 
 ## User settings
 xcuserdata/
+TestHealthKit.xcodeproj/xcuserdata/
+TestHealthKit.xcodeproj/xcshareddata/xcbaselines/
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
@@ -88,3 +90,9 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+TestHealthKit.xcodeproj/project.xcworkspace
+
+*.DS_Store
+*.swp
+.idea/
