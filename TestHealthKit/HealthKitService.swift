@@ -8,6 +8,8 @@
 import HealthKit
 import Foundation
 
+let medsengerParseNotAllowedMetadataKey = "MEDSENGER_PARSE_NOT_ALLOWED"
+
 public protocol HealthKitSync: Actor {
     
     /// Available or not HealthKit service on current device
@@ -15,16 +17,16 @@ public protocol HealthKitSync: Actor {
     
     /// Requests permission to save and read the specified data types.
     /// - Returns: Success granted or not.
-    func authorizeHealthKit() async -> Bool
+    func requestAuthorization() async -> Bool
     
     /// One time sync HealthKit records with Medsenger
-    func syncDataFromHealthKit() async
+    func fetchSamples() async
     
     /// Start background fetch HealthKit records with Medsenger
-    func startObservingHKChanges() async
+    func startObservingChanges() async
     
     /// Stop background fetch HealthKit records with Medsenger
-    func stopObservingHKChanges() async
+    func stopObservingChanges() async
     
 }
 
@@ -32,27 +34,17 @@ public actor HealthKitSyncService: HealthKitSync {
     
     nonisolated public let isHealthDataAvailable = HKHealthStore.isHealthDataAvailable()
     private let healthStore = HKHealthStore()
-    
     private let typesToRead: [MedsengerHealthType]
-    
-    private let skipSourcesBundleIdentifiers: [String]
     private let getIsProtectedDataAvailable: () async -> Bool
-    
     private let annalist: Annalist = OnlyLogAnnalist(withTag: "HealthKitSyncService")
-    
     private var observerQueries = [ObserverQuery]()
     
-    init(
-        typesToRead: [MedsengerHealthType],
-        skipSourcesBundleIdentifiers: [String],
-        getIsProtectedDataAvailable: @escaping () async -> Bool
-    ) {
+    init(typesToRead: [MedsengerHealthType], getIsProtectedDataAvailable: @escaping () async -> Bool) {
         self.typesToRead = typesToRead
-        self.skipSourcesBundleIdentifiers = skipSourcesBundleIdentifiers
         self.getIsProtectedDataAvailable = getIsProtectedDataAvailable
     }
     
-    public func authorizeHealthKit() async -> Bool {
+    public func requestAuthorization() async -> Bool {
         guard isHealthDataAvailable else {
             return false
         }
@@ -83,7 +75,7 @@ public actor HealthKitSyncService: HealthKitSync {
         }
     }
     
-    public func startObservingHKChanges() async {
+    public func startObservingChanges() async {
         await typesToRead.concurrentForEach { medsengerType in
             if let query = await self.observerQueries.asyncFirst(where: { await $0.sampleIdentifier == medsengerType.sampleType.identifier }) {
                 await query.startObservingChanges()
@@ -98,7 +90,7 @@ public actor HealthKitSyncService: HealthKitSync {
         }
     }
     
-    public func syncDataFromHealthKit() async {
+    public func fetchSamples() async {
         //        guard UserDefaults.isHealthKitSyncActive ?? false,
         //              await authorizeHealthKit() else {
         //            return
@@ -107,7 +99,7 @@ public actor HealthKitSyncService: HealthKitSync {
         // try? await account.updateProfile()
         
         if observerQueries.isEmpty {
-            await startObservingHKChanges()
+            await startObservingChanges()
         }
         
         await observerQueries.concurrentForEach { observerQuery in
@@ -115,7 +107,7 @@ public actor HealthKitSyncService: HealthKitSync {
         }
     }
     
-    public func stopObservingHKChanges() async {
+    public func stopObservingChanges() async {
         // UserDefaults.isHealthKitSyncActive = false
         while !observerQueries.isEmpty {
             await observerQueries.removeFirst().stopObservingChanges()

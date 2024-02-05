@@ -17,14 +17,16 @@ public struct MedsengerCategoryType: Sendable, MedsengerHealthType {
     let hkCategoryType: HKCategoryType
     let medsengerKey: String
     let dataEncoder: DataEncoder
+    let updateFrequency: HKUpdateFrequency
     
-    public init?(_ identifier: HKCategoryTypeIdentifier, medsengerKey: String, dataEncoder: @escaping DataEncoder) {
+    public init?(_ identifier: HKCategoryTypeIdentifier, medsengerKey: String, updateFrequency: HKUpdateFrequency = .immediate, dataEncoder: @escaping DataEncoder) {
         guard let categoryType = HKObjectType.categoryType(forIdentifier: identifier) else {
             return nil
         }
         self.hkCategoryType = categoryType
         self.medsengerKey = medsengerKey
         self.dataEncoder = dataEncoder
+        self.updateFrequency = updateFrequency
     }
     
     var sampleType: HKSampleType {

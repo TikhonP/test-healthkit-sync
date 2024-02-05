@@ -6,7 +6,6 @@
 //
 
 import HealthKit
-import Foundation
 
 extension Error {
     func healthHandle(_ message: String, using annalist: Annalist) {

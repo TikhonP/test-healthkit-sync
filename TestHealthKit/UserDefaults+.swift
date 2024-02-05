@@ -6,55 +6,64 @@
 //
 
 import HealthKit
-import Foundation
 
 let defaultDate = Date(timeIntervalSince1970: 1706572800)
 
-extension UserDefaults {
-    private static func getLastSyncDateUserDefaultsKey(for sampleIdentifier: String) -> String {
-        "healthkit_\(sampleIdentifier)_LastSyncDate"
+extension Date {
+    
+    /// Get the date two weeks ago.
+    static var twoWeeksAgo: Date? {
+        Calendar.current.date(byAdding: .day, value: -14, to: Date())
     }
     
-    static func getLastHKSyncDate(for sampleIdentifier: String, fromDate: Date = defaultDate) -> Date? {
-        
-        // Get the date two weeks ago.
-        let calendar = Calendar.current
-        var components = calendar.dateComponents([.year, .month, .day], from: Date())
-        guard let currentDay = components.day else {
-            return nil
-        }
-        components.day = currentDay - 14
-        guard let twoWeeksAgo = calendar.date(from: components) else {
-            return nil
-        }
+    static func getMedsengerLastSyncDate() async -> Date? {
+//        guard let twoWeeksAgo = Date.twoWeeksAgo else {
+//            return nil
+//        }
+//
+//        guard let lastHealthSyncDateTime = try? await User.get(\.lastHealthSyncDateTime) else {
+//            return twoWeeksAgo
+//        }
+//
+//        // Converting from UTC to current timezone
+//        let targetTz = TimeZone.current
+//        guard let initTz = TimeZone(abbreviation: "UTC") else {
+//            return nil
+//        }
+//        var calendar = Calendar.current
+//        calendar.timeZone = initTz
+//        var components = calendar.dateComponents(in: targetTz, from: lastHealthSyncDateTime)
+//        components.timeZone = initTz
+//
+//        guard let medsengerLastSyncDateLocalized = calendar.date(from: components) else {
+//            return twoWeeksAgo
+//        }
+//
+//        if medsengerLastSyncDateLocalized > twoWeeksAgo {
+//            return medsengerLastSyncDateLocalized
+//        } else {
+//            return twoWeeksAgo
+//        }
+        defaultDate
+    }
+    
+}
+
+extension UserDefaults {
+    private static func getLastSyncDateUserDefaultsKey(for sampleIdentifier: String) -> String {
+        "HealthKit_\(sampleIdentifier)_LastSyncDate"
+    }
+    
+    static func getLastSyncDate(for sampleIdentifier: String, medsengerLastSyncDate: Date? = defaultDate) -> Date? {
         
         let lastSyncDateUserDefaultsKey = getLastSyncDateUserDefaultsKey(for: sampleIdentifier)
+        let lastSyncDateForSample = UserDefaults.standard.object(forKey: lastSyncDateUserDefaultsKey) as? Date
         
-        guard let lastSyncDateForSample = UserDefaults.standard.object(
-            forKey: lastSyncDateUserDefaultsKey) as? Date else {
-            
-            let lastHealthSyncDateTime = fromDate
-            
-            // Converting from UTC to current timezone
-            let targetTz = TimeZone.current
-            guard let initTz = TimeZone(abbreviation: "UTC") else {
-                return nil
-            }
-            var calendar = Calendar.current
-            calendar.timeZone = initTz
-            var components = calendar.dateComponents(in: targetTz, from: lastHealthSyncDateTime)
-            components.timeZone = initTz
-            
-            guard let medsengerLastSyncDateLocalized = calendar.date(from: components) else {
-                return twoWeeksAgo
-            }
-            
-            if medsengerLastSyncDateLocalized > twoWeeksAgo {
-                setLastHKSyncDate(medsengerLastSyncDateLocalized, for: sampleIdentifier)
-                return medsengerLastSyncDateLocalized
-            } else {
-                return twoWeeksAgo
-            }
+        guard let lastSyncDateForSample else {
+            return medsengerLastSyncDate
+        }
+        guard let twoWeeksAgo = Date.twoWeeksAgo else {
+            return nil
         }
         if lastSyncDateForSample > twoWeeksAgo {
             return lastSyncDateForSample
@@ -63,7 +72,7 @@ extension UserDefaults {
         }
     }
     
-    static func setLastHKSyncDate(_ date: Date, for sampleIdentifier: String) {
+    static func setLastSyncDate(_ date: Date, for sampleIdentifier: String) {
         let lastSyncDateUserDefaultsKey = getLastSyncDateUserDefaultsKey(for: sampleIdentifier)
         UserDefaults.standard.set(date, forKey: lastSyncDateUserDefaultsKey)
     }

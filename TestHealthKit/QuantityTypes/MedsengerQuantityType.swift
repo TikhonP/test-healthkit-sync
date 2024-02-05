@@ -6,34 +6,36 @@
 //
 
 import HealthKit
-import Foundation
-
-public typealias CustomDataEncoder = @Sendable (Double) -> String
 
 /// Object for configuring HealthKit quantity types
 @available(macOS 13.0, *)
 public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
     
+    public typealias DataEncoder = @Sendable (Double) -> String
+    
     let hkQuantityType: HKQuantityType
     let unitString: String
     let medsengerKey: String
-    let customDataEncoder: CustomDataEncoder?
+    let customDataEncoder: DataEncoder?
     let byIntervals: DateComponents
+    let updateFrequency: HKUpdateFrequency
     
     /// Create object for retrieving types for Medsenger
     /// - Parameters:
     ///   - identifier: HK identifier.
     ///   - hkUnit: HK unit to send to medsenger.
-    ///   - medsengerKey: Medsenger key type.
+    ///   - medsengerKey: Medsenger server type's string key.
     ///   - aggregationStrategy: Strategy for aggregation lots of hk samples.
-    ///   - byIntervals: The date components that define the time interval for each statistics object in the collection. For a collection of sample time intervals, see Listing 1.
+    ///   - byIntervals: The date components that define the time interval for each statistics object in the collection.
+    ///   - updateFrequency: The maximum frequency of the updates. The system wakes your app from the background at most once per time period specified.
     ///   - customDataEncoder: Callback for encoding HealthKit data to string optional, by default `String()` is used.
     public init?(
         _ identifier: HKQuantityTypeIdentifier,
         hkUnit: HKUnit,
         medsengerKey: String,
         byIntervals: DateComponents = DateComponents(minute: 5),
-        customDataEncoder: CustomDataEncoder? = nil
+        updateFrequency: HKUpdateFrequency = .immediate,
+        customDataEncoder: DataEncoder? = nil
     ) {
         guard let hkQuantityType = HKObjectType.quantityType(forIdentifier: identifier) else {
             return nil
@@ -43,6 +45,7 @@ public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
         self.medsengerKey = medsengerKey
         self.customDataEncoder = customDataEncoder
         self.byIntervals = byIntervals
+        self.updateFrequency = updateFrequency
     }
     
     var hkUnit: HKUnit {

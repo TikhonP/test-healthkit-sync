@@ -14,22 +14,22 @@ struct ContentView: View {
                 Section("Health Sync Service") {
                     Button("Authorize health") {
                         Task {
-                            await HealthKitSyncService.shared.authorizeHealthKit()
+                            await HealthKitSyncService.shared.requestAuthorization()
                         }
                     }
                     Button("Start observing health changes") {
                         Task {
-                            await HealthKitSyncService.shared.startObservingHKChanges()
+                            await HealthKitSyncService.shared.startObservingChanges()
                         }
                     }
                     Button("Stop observing health changes") {
                         Task {
-                            await HealthKitSyncService.shared.stopObservingHKChanges()
+                            await HealthKitSyncService.shared.stopObservingChanges()
                         }
                     }
                     Button("Fetch samples") {
                         Task {
-                            await HealthKitSyncService.shared.syncDataFromHealthKit()
+                            await HealthKitSyncService.shared.fetchSamples()
                         }
                     }
                     

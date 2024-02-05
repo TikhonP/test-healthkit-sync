@@ -39,19 +39,26 @@ class CategoryHealthQuery {
     }
     
     func executeCategoryQuery(healthStore: HKHealthStore) {
+        
+        let allowedSamplesPredicate = NSCompoundPredicate(
+            notPredicateWithSubpredicate: HKQuery.predicateForObjects(withMetadataKey: medsengerParseNotAllowedMetadataKey)
+        )
+        
         let query: HKAnchoredObjectQuery
         switch anchor {
         case .startDate(let date):
+            let datePredicate = HKQuery.predicateForSamples(withStart: date, end: Date())
+            let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, allowedSamplesPredicate])
             query = HKAnchoredObjectQuery(
                 type: medsengerCategoryType.sampleType,
-                predicate: HKQuery.predicateForSamples(withStart: date, end: Date()),
+                predicate: predicate,
                 anchor: nil,
                 limit: HKObjectQueryNoLimit,
                 resultsHandler: resultsHandler)
         case .anchor(let anchor):
             query = HKAnchoredObjectQuery(
                 type: medsengerCategoryType.sampleType,
-                predicate: nil,
+                predicate: allowedSamplesPredicate,
                 anchor: anchor,
                 limit: HKObjectQueryNoLimit,
                 resultsHandler: resultsHandler)

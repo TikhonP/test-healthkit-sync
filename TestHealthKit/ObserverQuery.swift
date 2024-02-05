@@ -6,7 +6,6 @@
 //
 
 import HealthKit
-import Foundation
 
 protocol ObserverQuery: Actor {
     
@@ -46,17 +45,22 @@ extension ObserverQuery {
         self.query = query
         healthStore.execute(query)
         do {
-            try await healthStore.enableBackgroundDelivery(for: medsengerType.sampleType, frequency: .immediate)
+            try await healthStore.enableBackgroundDelivery(for: medsengerType.sampleType, frequency: medsengerType.updateFrequency)
             annalist.log(.info, "Enabled background delivery for \(sampleIdentifier)")
         } catch {
             error.healthHandle("enableBackgroundDelivery failed for: \(sampleIdentifier)", using: annalist)
         }
     }
     
-    func stopObservingChanges() {
+    func stopObservingChanges() async {
         if let query {
             healthStore.stop(query)
             self.query = nil
+            do {
+                try await healthStore.disableBackgroundDelivery(for: medsengerType.sampleType)
+            } catch {
+                error.healthHandle("disableBackgroundDelivery failed for: \(sampleIdentifier)", using: annalist)
+            }
         }
     }
     
@@ -85,110 +89,6 @@ extension ObserverQuery {
             }
             await fetchSamples()
             completionHandler()
-        }
-    }
-}
-
-actor QuantityObserverQuery: ObserverQuery {
-    
-    var annalist: Annalist = OnlyLogAnnalist(withTag: "somelog")
-    
-    let healthStore: HKHealthStore
-    let getIsProtectedDataAvailable: () async -> Bool
-    
-    var query: HKObserverQuery?
-    var isFetchingData = false
-    
-    private let medsengerQuantityType: MedsengerQuantityType
-    
-    init(medsengerQuantityType: MedsengerQuantityType, healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) {
-        self.medsengerQuantityType = medsengerQuantityType
-        self.healthStore = healthStore
-        self.getIsProtectedDataAvailable = getIsProtectedDataAvailable
-    }
-    
-    var medsengerType: MedsengerHealthType {
-        medsengerQuantityType
-    }
-    
-    var sampleIdentifier: String {
-        medsengerQuantityType.hkQuantityType.identifier
-    }
-    
-    func fetchSamples() async {
-        guard lock() else { return }
-        defer { unlock() }
-        
-        guard let startDate = UserDefaults.getLastHKSyncDate(for: sampleIdentifier) else {
-            annalist.log(.error, "fetchSamples: failed to get start date")
-            return
-        }
-        
-        do {
-            print("Executing query")
-            let now = Date()
-            try await QuantityHealthQuery(medsengerQuantityType: medsengerQuantityType, withStart: startDate)
-                .getSamples(healthStore: healthStore)
-                .submit()
-            UserDefaults.setLastHKSyncDate(now, for: sampleIdentifier)
-            annalist.log(.info, "HealthKitSync submitted \(sampleIdentifier)")
-        } catch {
-            error.healthHandle("fetchSamples \(sampleIdentifier)", using: annalist)
-        }
-    }
-}
-
-actor CategoryObserverQuery: ObserverQuery {
-    
-    var annalist: Annalist = OnlyLogAnnalist(withTag: "somelog")
-    
-    let healthStore: HKHealthStore
-    let getIsProtectedDataAvailable: () async -> Bool
-    
-    var query: HKObserverQuery?
-    var isFetchingData = false
-    
-    private let medsengerCategoryType: MedsengerCategoryType
-    
-    init(medsengerCategoryType: MedsengerCategoryType, healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) {
-        self.medsengerCategoryType = medsengerCategoryType
-        self.healthStore = healthStore
-        self.getIsProtectedDataAvailable = getIsProtectedDataAvailable
-    }
-    
-    var medsengerType: MedsengerHealthType {
-        medsengerCategoryType
-    }
-    
-    var sampleIdentifier: String {
-        medsengerCategoryType.hkCategoryType.identifier
-    }
-    
-    func fetchSamples() async {
-        guard lock() else { return }
-        defer { unlock() }
-        
-        let anchorData: AnchorData
-        if let anchor = UserDefaults.getQueryAnchor(for: sampleIdentifier) {
-            anchorData = .anchor(anchor)
-        } else {
-            guard let startDate = await Date.getLastHealthSyncDate() else {
-                return
-            }
-            anchorData = .startDate(startDate)
-        }
-        
-        do {
-            var newAnchor: HKQueryAnchor?
-            try await CategoryHealthQuery(medsengerCategoryType: medsengerCategoryType, anchor: anchorData) { newAnchor = $0 }
-                .getSamples(healthStore: healthStore)
-                .submit()
-            if let newAnchor {
-                try UserDefaults.setQueryAnchor(for: sampleIdentifier, anchor: newAnchor)
-            }
-            annalist.log(.info, "HealthKitSync submitted \(sampleIdentifier)")
-        } catch {
-            error.healthHandle("fetchSamples \(sampleIdentifier)", using: annalist)
         }
     }
 }

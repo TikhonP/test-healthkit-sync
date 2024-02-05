@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		438571C52B70EDF000163ADF /* QuantityObserverQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438571C42B70EDF000163ADF /* QuantityObserverQuery.swift */; };
+		438571C82B70EE8800163ADF /* CategoryObserverQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438571C72B70EE8800163ADF /* CategoryObserverQuery.swift */; };
 		43A36F992B6B8E3500D87A30 /* QuantityHealthQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */; };
 		43A36F9B2B6B9B5D00D87A30 /* ObserverQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */; };
 		43A36F9D2B6BA8B400D87A30 /* MedsengerHealthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */; };
@@ -14,7 +16,6 @@
 		43A36FA12B6BAF9000D87A30 /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FA02B6BAF9000D87A30 /* Collection+.swift */; };
 		43A36FA52B6BE44000D87A30 /* CategoryHealthQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */; };
 		43A36FA92B6C120500D87A30 /* MedsengerCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */; };
-		43A36FAB2B6C379000D87A30 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36FAA2B6C379000D87A30 /* Date+.swift */; };
 		43F63CB32B6A13CF00EB27A8 /* TestHealthKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CB22B6A13CF00EB27A8 /* TestHealthKitApp.swift */; };
 		43F63CB52B6A13CF00EB27A8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F63CB42B6A13CF00EB27A8 /* ContentView.swift */; };
 		43F63CB92B6A13D000EB27A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43F63CB82B6A13D000EB27A8 /* Assets.xcassets */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		438571C42B70EDF000163ADF /* QuantityObserverQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityObserverQuery.swift; sourceTree = "<group>"; };
+		438571C72B70EE8800163ADF /* CategoryObserverQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryObserverQuery.swift; sourceTree = "<group>"; };
 		43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityHealthQuery.swift; sourceTree = "<group>"; };
 		43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverQuery.swift; sourceTree = "<group>"; };
 		43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsengerHealthType.swift; sourceTree = "<group>"; };
@@ -34,7 +37,6 @@
 		43A36FA02B6BAF9000D87A30 /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHealthQuery.swift; sourceTree = "<group>"; };
 		43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedsengerCategoryType.swift; sourceTree = "<group>"; };
-		43A36FAA2B6C379000D87A30 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		43AE6ED42B6C55B2007C284F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		43F63CAF2B6A13CF00EB27A8 /* TestHealthKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestHealthKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F63CB22B6A13CF00EB27A8 /* TestHealthKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHealthKitApp.swift; sourceTree = "<group>"; };
@@ -61,6 +63,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		438571C62B70EE5000163ADF /* CategoryTypes */ = {
+			isa = PBXGroup;
+			children = (
+				43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */,
+				43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */,
+				438571C72B70EE8800163ADF /* CategoryObserverQuery.swift */,
+			);
+			path = CategoryTypes;
+			sourceTree = "<group>";
+		};
+		43CE48A82B6D148B00A91D3C /* QuantityTypes */ = {
+			isa = PBXGroup;
+			children = (
+				43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */,
+				43F63CC32B6A14BD00EB27A8 /* MedsengerQuantityType.swift */,
+				438571C42B70EDF000163ADF /* QuantityObserverQuery.swift */,
+			);
+			path = QuantityTypes;
+			sourceTree = "<group>";
+		};
 		43F63CA62B6A13CF00EB27A8 = {
 			isa = PBXGroup;
 			children = (
@@ -81,25 +103,22 @@
 		43F63CB12B6A13CF00EB27A8 /* TestHealthKit */ = {
 			isa = PBXGroup;
 			children = (
+				438571C62B70EE5000163ADF /* CategoryTypes */,
+				43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */,
+				43CE48A82B6D148B00A91D3C /* QuantityTypes */,
 				43F63CCF2B6A471100EB27A8 /* Info.plist */,
 				43F63CB22B6A13CF00EB27A8 /* TestHealthKitApp.swift */,
 				43F63CB42B6A13CF00EB27A8 /* ContentView.swift */,
 				43F63CB82B6A13D000EB27A8 /* Assets.xcassets */,
 				43F63CBA2B6A13D000EB27A8 /* TestHealthKit.entitlements */,
 				43F63CBB2B6A13D000EB27A8 /* Preview Content */,
-				43F63CC32B6A14BD00EB27A8 /* MedsengerQuantityType.swift */,
 				43F63CC72B6A157500EB27A8 /* HealthKitService.swift */,
 				43F63CC92B6A16BD00EB27A8 /* Annalist.swift */,
 				43F63CCB2B6A1BB300EB27A8 /* UserDefaults+.swift */,
 				43F63CCD2B6A254B00EB27A8 /* HealthKitRecord.swift */,
-				43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */,
 				43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */,
-				43A36F9C2B6BA8B400D87A30 /* MedsengerHealthType.swift */,
 				43A36F9E2B6BAD1800D87A30 /* Error+healthHandle.swift */,
 				43A36FA02B6BAF9000D87A30 /* Collection+.swift */,
-				43A36FA42B6BE44000D87A30 /* CategoryHealthQuery.swift */,
-				43A36FA82B6C120500D87A30 /* MedsengerCategoryType.swift */,
-				43A36FAA2B6C379000D87A30 /* Date+.swift */,
 			);
 			path = TestHealthKit;
 			sourceTree = "<group>";
@@ -184,12 +203,13 @@
 			files = (
 				43F63CCC2B6A1BB300EB27A8 /* UserDefaults+.swift in Sources */,
 				43F63CB52B6A13CF00EB27A8 /* ContentView.swift in Sources */,
+				438571C82B70EE8800163ADF /* CategoryObserverQuery.swift in Sources */,
 				43A36FA92B6C120500D87A30 /* MedsengerCategoryType.swift in Sources */,
 				43A36F9D2B6BA8B400D87A30 /* MedsengerHealthType.swift in Sources */,
 				43A36F992B6B8E3500D87A30 /* QuantityHealthQuery.swift in Sources */,
 				43A36F9F2B6BAD1800D87A30 /* Error+healthHandle.swift in Sources */,
 				43F63CC82B6A157500EB27A8 /* HealthKitService.swift in Sources */,
-				43A36FAB2B6C379000D87A30 /* Date+.swift in Sources */,
+				438571C52B70EDF000163ADF /* QuantityObserverQuery.swift in Sources */,
 				43F63CCE2B6A254B00EB27A8 /* HealthKitRecord.swift in Sources */,
 				43A36F9B2B6B9B5D00D87A30 /* ObserverQuery.swift in Sources */,
 				43F63CC42B6A14BD00EB27A8 /* MedsengerQuantityType.swift in Sources */,

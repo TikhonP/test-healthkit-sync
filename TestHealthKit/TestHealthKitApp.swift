@@ -59,7 +59,6 @@ let typesToRead: [(any MedsengerHealthType)?] = [
 extension HealthKitSyncService {
     static let shared = HealthKitSyncService(
         typesToRead: typesToRead.compactMap { $0 },
-        skipSourcesBundleIdentifiers: [],
         getIsProtectedDataAvailable: {
             await MainActor.run {
                 UIApplication.shared.isProtectedDataAvailable
@@ -69,9 +68,23 @@ extension HealthKitSyncService {
 
 @main
 struct TestHealthKitApp: App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+    }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        Task {
+            if await HealthKitSyncService.shared.requestAuthorization() {
+                await HealthKitSyncService.shared.startObservingChanges()
+            }
+        }
+        return true
     }
 }

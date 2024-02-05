@@ -25,6 +25,7 @@ struct HealthKitRecord: Encodable {
 @available(iOS 14.0, macOS 13.0, *)
 extension HealthKitRecord {
     
+    /// Init for MedsengerQuantityQuery.
     init(quantity: HKQuantity, date: Date, medsengerQuantityType: MedsengerQuantityType, sources: [HKSource]?) {
         self.categoryName = medsengerQuantityType.medsengerKey
         self.time = date
@@ -32,6 +33,7 @@ extension HealthKitRecord {
         self.value = medsengerQuantityType.customDataEncoder?(value) ?? String(value)
     }
     
+    /// Init for MedsengerCategoryQuery.
     init?(categorySample: HKCategorySample, medsengerCategoryType: MedsengerCategoryType) {
         guard let value = medsengerCategoryType.dataEncoder(categorySample.value) else {
             return nil

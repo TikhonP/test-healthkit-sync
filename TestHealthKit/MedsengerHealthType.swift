@@ -6,11 +6,21 @@
 //
 
 import HealthKit
-import Foundation
 
+/// Abstract Medsenger record type.
 protocol MedsengerHealthType {
+    
     var sampleType: HKSampleType { get }
+    var updateFrequency: HKUpdateFrequency { get }
+    
+    
+    /// Get observer query for specific record type.
+    /// - Parameters:
+    ///   - healthStore: Health store object initiated in Health Sync service.
+    ///   - getIsProtectedDataAvailable: Is phone under encryption callback.
+    /// - Returns: Observer query object for specific record type.
     func getObserverQuery(healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) -> ObserverQuery
+    
 }
 
 extension Array<MedsengerHealthType> {
