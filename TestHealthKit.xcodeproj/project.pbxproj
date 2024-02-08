@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432D73222B753AA500DCB2D8 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432D73212B753AA500DCB2D8 /* Date+.swift */; };
+		432D73242B753BDA00DCB2D8 /* Date+timezone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432D73232B753BDA00DCB2D8 /* Date+timezone.swift */; };
 		438571C52B70EDF000163ADF /* QuantityObserverQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438571C42B70EDF000163ADF /* QuantityObserverQuery.swift */; };
 		438571C82B70EE8800163ADF /* CategoryObserverQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438571C72B70EE8800163ADF /* CategoryObserverQuery.swift */; };
 		43A36F992B6B8E3500D87A30 /* QuantityHealthQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		432D73212B753AA500DCB2D8 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		432D73232B753BDA00DCB2D8 /* Date+timezone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+timezone.swift"; sourceTree = "<group>"; };
 		438571C42B70EDF000163ADF /* QuantityObserverQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityObserverQuery.swift; sourceTree = "<group>"; };
 		438571C72B70EE8800163ADF /* CategoryObserverQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryObserverQuery.swift; sourceTree = "<group>"; };
 		43A36F982B6B8E3500D87A30 /* QuantityHealthQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityHealthQuery.swift; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				43A36F9A2B6B9B5D00D87A30 /* ObserverQuery.swift */,
 				43A36F9E2B6BAD1800D87A30 /* Error+healthHandle.swift */,
 				43A36FA02B6BAF9000D87A30 /* Collection+.swift */,
+				432D73212B753AA500DCB2D8 /* Date+.swift */,
+				432D73232B753BDA00DCB2D8 /* Date+timezone.swift */,
 			);
 			path = TestHealthKit;
 			sourceTree = "<group>";
@@ -213,7 +219,9 @@
 				43F63CCE2B6A254B00EB27A8 /* HealthKitRecord.swift in Sources */,
 				43A36F9B2B6B9B5D00D87A30 /* ObserverQuery.swift in Sources */,
 				43F63CC42B6A14BD00EB27A8 /* MedsengerQuantityType.swift in Sources */,
+				432D73222B753AA500DCB2D8 /* Date+.swift in Sources */,
 				43A36FA12B6BAF9000D87A30 /* Collection+.swift in Sources */,
+				432D73242B753BDA00DCB2D8 /* Date+timezone.swift in Sources */,
 				43F63CCA2B6A16BD00EB27A8 /* Annalist.swift in Sources */,
 				43A36FA52B6BE44000D87A30 /* CategoryHealthQuery.swift in Sources */,
 				43F63CB32B6A13CF00EB27A8 /* TestHealthKitApp.swift in Sources */,

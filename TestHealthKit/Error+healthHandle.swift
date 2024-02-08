@@ -1,12 +1,13 @@
 //
 //  Error+healthHandle.swift
-//  TestHealthKit
 //
-//  Created by Tikhon Petrishchev on 01.02.2024.
+//
+//  Created by Tikhon Petrishchev on 05.02.2024.
 //
 
 import HealthKit
 
+@available(macOS 13.0, *)
 extension Error {
     func healthHandle(_ message: String, using annalist: Annalist) {
         if (self as NSError).code == 100 {

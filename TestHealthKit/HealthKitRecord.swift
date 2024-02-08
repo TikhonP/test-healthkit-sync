@@ -1,8 +1,9 @@
 //
 //  HealthKitRecord.swift
-//  TestHealthKit
+//  Medsenger
 //
-//  Created by Tikhon Petrishchev on 31.01.2024.
+//  Created by Tikhon Petrishchev on 01.12.2022.
+//  Copyright © 2022 TelePat ltd. All rights reserved.
 //
 
 import HealthKit
@@ -45,13 +46,14 @@ extension HealthKitRecord {
     
 }
 
+@available(macOS 13.0, *)
 extension Array<HealthKitRecord> {
     func submit() async throws {
         guard !self.isEmpty else {
             return
         }
         let jsonEncoder = JSONEncoder()
-        jsonEncoder.dateEncodingStrategy = .iso8601
+        jsonEncoder.dateEncodingStrategy = .secondsSince1970
         jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
         let data = try jsonEncoder.encode(self)
         

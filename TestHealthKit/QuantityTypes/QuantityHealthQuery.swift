@@ -1,12 +1,13 @@
 //
 //  QuantityHealthQuery.swift
-//  TestHealthKit
 //
-//  Created by Tikhon Petrishchev on 01.02.2024.
+//
+//  Created by Tikhon Petrishchev on 05.02.2024.
 //
 
 import HealthKit
 
+@available(macOS 13.0, *)
 class QuantityHealthQuery {
     
     private var continuation: CheckedContinuation<[HealthKitRecord], Error>?
@@ -49,7 +50,8 @@ class QuantityHealthQuery {
         
         let datePredicate = HKQuery.predicateForSamples(withStart: startDate, end: now)
         let allowedSamplesPredicate = NSCompoundPredicate(
-            notPredicateWithSubpredicate: HKQuery.predicateForObjects(withMetadataKey: medsengerParseNotAllowedMetadataKey)
+            notPredicateWithSubpredicate: HKQuery.predicateForObjects(
+                withMetadataKey: medsengerParseNotAllowedMetadataKey)
         )
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, allowedSamplesPredicate])
         
@@ -64,7 +66,9 @@ class QuantityHealthQuery {
         healthStore.execute(query)
     }
     
-    private func statisticsHandler(_ query: HKStatisticsCollectionQuery, _ results: HKStatisticsCollection?, _ error: Error?) {
+    private func statisticsHandler(_ query: HKStatisticsCollectionQuery,
+                                   _ results: HKStatisticsCollection?,
+                                   _ error: Error?) {
         if let error {
             continuation?.resume(throwing: error)
             return
@@ -82,6 +86,7 @@ class QuantityHealthQuery {
     }
 }
 
+@available(macOS 13.0, *)
 extension HKStatistics {
     func asHealthKitRecord(medsengerQuantityType: MedsengerQuantityType) -> HealthKitRecord? {
         switch self.quantityType.aggregationStyle {
@@ -110,6 +115,7 @@ extension HKStatistics {
     }
 }
 
+@available(macOS 13.0, *)
 extension HKQuantityAggregationStyle {
     func asStatisticsOptions() -> HKStatisticsOptions {
         switch self {

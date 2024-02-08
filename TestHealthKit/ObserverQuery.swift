@@ -1,13 +1,14 @@
 //
-//  QuantityObserverQuery.swift
-//  TestHealthKit
+//  ObserverQuery.swift
 //
-//  Created by Tikhon Petrishchev on 01.02.2024.
+//
+//  Created by Tikhon Petrishchev on 05.02.2024.
 //
 
 import HealthKit
 
-protocol ObserverQuery: Actor {
+@available(macOS 13.0, *)
+public protocol ObserverQuery: Actor {
     
     var isFetchingData: Bool { get set }
     var query: HKObserverQuery? { get set }
@@ -23,6 +24,7 @@ protocol ObserverQuery: Actor {
     
 }
 
+@available(macOS 13.0, *)
 extension ObserverQuery {
     
     func lock() -> Bool {
@@ -41,11 +43,13 @@ extension ObserverQuery {
         guard query == nil else {
             return
         }
-        let query = HKObserverQuery(sampleType: medsengerType.sampleType, predicate: nil, updateHandler: observerHandler)
+        let query = HKObserverQuery(
+            sampleType: medsengerType.sampleType, predicate: nil, updateHandler: observerHandler)
         self.query = query
         healthStore.execute(query)
         do {
-            try await healthStore.enableBackgroundDelivery(for: medsengerType.sampleType, frequency: medsengerType.updateFrequency)
+            try await healthStore.enableBackgroundDelivery(for: medsengerType.sampleType,
+                                                           frequency: medsengerType.updateFrequency)
             annalist.log(.info, "Enabled background delivery for \(sampleIdentifier)")
         } catch {
             error.healthHandle("enableBackgroundDelivery failed for: \(sampleIdentifier)", using: annalist)
@@ -73,14 +77,14 @@ extension ObserverQuery {
             completionHandler()
             return
         }
-        // TODO: uncomment
-        /*
-         guard "UserDefaults.isHealthKitSyncActive ?? false" else {
-         healthStore.stop(query)
-         annalist.log(.info, "Stop query because isHealthKitSyncActive is false")
-         completionHandler()
-         return
-         */
+//        guard UserDefaults.isHealthKitSyncActive ?? false else {
+//            Task {
+//                await stopObservingChanges()
+//                annalist.log(.info, "Stop query because isHealthKitSyncActive is false")
+//                completionHandler()
+//            }
+//            return
+//        }
         Task {
             guard await getIsProtectedDataAvailable() else {
                 annalist.log(.info, "updateHandler: got updates but device is locked")

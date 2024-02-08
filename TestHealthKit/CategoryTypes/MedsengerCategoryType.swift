@@ -1,12 +1,11 @@
 //
 //  MedsengerCategoryType.swift
-//  TestHealthKit
 //
-//  Created by Tikhon Petrishchev on 01.02.2024.
+//
+//  Created by Tikhon Petrishchev on 15.01.2024.
 //
 
 import HealthKit
-import Foundation
 
 public typealias DataEncoder = @Sendable (Int) -> String?
 
@@ -17,9 +16,10 @@ public struct MedsengerCategoryType: Sendable, MedsengerHealthType {
     let hkCategoryType: HKCategoryType
     let medsengerKey: String
     let dataEncoder: DataEncoder
-    let updateFrequency: HKUpdateFrequency
+    public let updateFrequency: HKUpdateFrequency
     
-    public init?(_ identifier: HKCategoryTypeIdentifier, medsengerKey: String, updateFrequency: HKUpdateFrequency = .immediate, dataEncoder: @escaping DataEncoder) {
+    public init?(_ identifier: HKCategoryTypeIdentifier, medsengerKey: String,
+                 updateFrequency: HKUpdateFrequency = .immediate, dataEncoder: @escaping DataEncoder) {
         guard let categoryType = HKObjectType.categoryType(forIdentifier: identifier) else {
             return nil
         }
@@ -29,11 +29,12 @@ public struct MedsengerCategoryType: Sendable, MedsengerHealthType {
         self.updateFrequency = updateFrequency
     }
     
-    var sampleType: HKSampleType {
+    public var sampleType: HKSampleType {
         hkCategoryType
     }
     
-    func getObserverQuery(healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) -> ObserverQuery {
+    public func getObserverQuery(healthStore: HKHealthStore,
+                                 getIsProtectedDataAvailable: @escaping () async -> Bool) -> ObserverQuery {
         CategoryObserverQuery(
             medsengerCategoryType: self,
             healthStore: healthStore,

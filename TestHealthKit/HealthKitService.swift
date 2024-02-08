@@ -1,14 +1,12 @@
 //
-//  HealthKitService.swift
-//  TestHealthKit
+//  HealthKitSyncService.swift
+//  Medsenger
 //
-//  Created by Tikhon Petrishchev on 31.01.2024.
+//  Created by Tikhon Petrishchev on 01.12.2022.
+//  Copyright © 2022 TelePat ltd. All rights reserved.
 //
 
 import HealthKit
-import Foundation
-
-let medsengerParseNotAllowedMetadataKey = "MEDSENGER_PARSE_NOT_ALLOWED"
 
 public protocol HealthKitSync: Actor {
     
@@ -30,16 +28,23 @@ public protocol HealthKitSync: Actor {
     
 }
 
+let medsengerParseNotAllowedMetadataKey = "MEDSENGER_PARSE_NOT_ALLOWED"
+
+/// Service provides HealthKit data synchronization with medsenger
+@available(iOS 14.0, macOS 13.0, *)
 public actor HealthKitSyncService: HealthKitSync {
     
     nonisolated public let isHealthDataAvailable = HKHealthStore.isHealthDataAvailable()
     private let healthStore = HKHealthStore()
     private let typesToRead: [MedsengerHealthType]
     private let getIsProtectedDataAvailable: () async -> Bool
-    private let annalist: Annalist = OnlyLogAnnalist(withTag: "HealthKitSyncService")
     private var observerQueries = [ObserverQuery]()
     
-    init(typesToRead: [MedsengerHealthType], getIsProtectedDataAvailable: @escaping () async -> Bool) {
+//    @Inject private var account: Account
+    
+    private let annalist: Annalist = OnlyLogAnnalist(withTag: "HealthKitSyncService")
+    
+    public init(typesToRead: [MedsengerHealthType], getIsProtectedDataAvailable: @escaping () async -> Bool) {
         self.typesToRead = typesToRead
         self.getIsProtectedDataAvailable = getIsProtectedDataAvailable
     }
@@ -63,7 +68,8 @@ public actor HealthKitSyncService: HealthKitSync {
                         if let error {
                             if let self {
                                 Task {
-                                    error.healthHandle("HealthKitSync requestAuthorization error", using: self.annalist)
+                                    error.healthHandle("HealthKitSync requestAuthorization error",
+                                                             using: self.annalist)
                                 }
                             }
                             continuation.resume(returning: false)
@@ -77,7 +83,8 @@ public actor HealthKitSyncService: HealthKitSync {
     
     public func startObservingChanges() async {
         await typesToRead.concurrentForEach { medsengerType in
-            if let query = await self.observerQueries.asyncFirst(where: { await $0.sampleIdentifier == medsengerType.sampleType.identifier }) {
+            if let query = await self.observerQueries
+                .asyncFirst(where: { await $0.sampleIdentifier == medsengerType.sampleType.identifier }) {
                 await query.startObservingChanges()
             } else {
                 let query = medsengerType.getObserverQuery(
@@ -90,27 +97,28 @@ public actor HealthKitSyncService: HealthKitSync {
         }
     }
     
+    public func stopObservingChanges() async {
+//        UserDefaults.isHealthKitSyncActive = false
+        while !observerQueries.isEmpty {
+            await observerQueries.removeFirst().stopObservingChanges()
+        }
+    }
+    
     public func fetchSamples() async {
-        //        guard UserDefaults.isHealthKitSyncActive ?? false,
-        //              await authorizeHealthKit() else {
-        //            return
-        //        }
+//        guard UserDefaults.isHealthKitSyncActive ?? false,
+//              await requestAuthorization() else {
+//            return
+//        }
         
-        // try? await account.updateProfile()
+//        try? await account.updateProfile()
         
         if observerQueries.isEmpty {
             await startObservingChanges()
+            return
         }
         
         await observerQueries.concurrentForEach { observerQuery in
             await observerQuery.fetchSamples()
-        }
-    }
-    
-    public func stopObservingChanges() async {
-        // UserDefaults.isHealthKitSyncActive = false
-        while !observerQueries.isEmpty {
-            await observerQueries.removeFirst().stopObservingChanges()
         }
     }
     

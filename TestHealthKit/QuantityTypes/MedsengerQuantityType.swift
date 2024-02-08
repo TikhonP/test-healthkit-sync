@@ -1,8 +1,8 @@
 //
 //  MedsengerQuantityType.swift
-//  TestHealthKit
 //
-//  Created by Tikhon Petrishchev on 31.01.2024.
+//
+//  Created by Tikhon Petrishchev on 02.03.2023.
 //
 
 import HealthKit
@@ -18,7 +18,7 @@ public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
     let medsengerKey: String
     let customDataEncoder: DataEncoder?
     let byIntervals: DateComponents
-    let updateFrequency: HKUpdateFrequency
+    public let updateFrequency: HKUpdateFrequency
     
     /// Create object for retrieving types for Medsenger
     /// - Parameters:
@@ -27,7 +27,8 @@ public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
     ///   - medsengerKey: Medsenger server type's string key.
     ///   - aggregationStrategy: Strategy for aggregation lots of hk samples.
     ///   - byIntervals: The date components that define the time interval for each statistics object in the collection.
-    ///   - updateFrequency: The maximum frequency of the updates. The system wakes your app from the background at most once per time period specified.
+    ///   - updateFrequency: The maximum frequency of the updates. The system wakes your app from the background
+    ///                      at most once per time period specified.
     ///   - customDataEncoder: Callback for encoding HealthKit data to string optional, by default `String()` is used.
     public init?(
         _ identifier: HKQuantityTypeIdentifier,
@@ -52,11 +53,12 @@ public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
         HKUnit(from: unitString)
     }
     
-    var sampleType: HKSampleType {
+    public var sampleType: HKSampleType {
         hkQuantityType
     }
     
-    func getObserverQuery(healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) -> ObserverQuery {
+    public func getObserverQuery(healthStore: HKHealthStore,
+                                 getIsProtectedDataAvailable: @escaping () async -> Bool) -> ObserverQuery {
         QuantityObserverQuery(
             medsengerQuantityType: self,
             healthStore: healthStore,

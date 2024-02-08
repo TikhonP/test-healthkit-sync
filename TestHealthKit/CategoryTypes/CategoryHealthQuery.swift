@@ -1,20 +1,22 @@
 //
 //  CategoryHealthQuery.swift
-//  TestHealthKit
 //
-//  Created by Tikhon Petrishchev on 01.02.2024.
+//
+//  Created by Tikhon Petrishchev on 05.02.2024.
 //
 
 import HealthKit
-import Foundation
 
+@available(macOS 13.0, *)
 enum AnchorData {
     case startDate(Date)
     case anchor(HKQueryAnchor)
 }
 
+@available(macOS 13.0, *)
 typealias NewAnchorHandler = (HKQueryAnchor?) -> Void
 
+@available(macOS 13.0, *)
 class CategoryHealthQuery {
     
     private var continuation: CheckedContinuation<[HealthKitRecord], Error>?
@@ -24,7 +26,9 @@ class CategoryHealthQuery {
     private let anchor: AnchorData
     private let newAnchorHandler: NewAnchorHandler
     
-    init(medsengerCategoryType: MedsengerCategoryType, anchor: AnchorData, newAnchorHandler: @escaping NewAnchorHandler) {
+    init(medsengerCategoryType: MedsengerCategoryType,
+         anchor: AnchorData,
+         newAnchorHandler: @escaping NewAnchorHandler) {
         self.medsengerCategoryType = medsengerCategoryType
         self.categoryType = medsengerCategoryType.hkCategoryType
         self.anchor = anchor
@@ -41,7 +45,8 @@ class CategoryHealthQuery {
     func executeCategoryQuery(healthStore: HKHealthStore) {
         
         let allowedSamplesPredicate = NSCompoundPredicate(
-            notPredicateWithSubpredicate: HKQuery.predicateForObjects(withMetadataKey: medsengerParseNotAllowedMetadataKey)
+            notPredicateWithSubpredicate: HKQuery.predicateForObjects(
+                withMetadataKey: medsengerParseNotAllowedMetadataKey)
         )
         
         let query: HKAnchoredObjectQuery
@@ -66,7 +71,9 @@ class CategoryHealthQuery {
         healthStore.execute(query)
     }
     
-    func resultsHandler(_ query: HKAnchoredObjectQuery, _ newSamples: [HKSample]?, _ deletedObjects: [HKDeletedObject]?, _ newAnchor: HKQueryAnchor?, _ error: Error?) {
+    func resultsHandler(_ query: HKAnchoredObjectQuery, _ newSamples: [HKSample]?,
+                        _ deletedObjects: [HKDeletedObject]?, _ newAnchor: HKQueryAnchor?,
+                        _ error: Error?) {
         if let error {
             continuation?.resume(throwing: error)
             return

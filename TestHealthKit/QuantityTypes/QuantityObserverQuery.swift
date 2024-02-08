@@ -1,15 +1,14 @@
 //
 //  QuantityObserverQuery.swift
-//  TestHealthKit
+//
 //
 //  Created by Tikhon Petrishchev on 05.02.2024.
 //
 
 import HealthKit
 
+@available(macOS 13.0, *)
 actor QuantityObserverQuery: ObserverQuery {
-    
-    var annalist: Annalist = OnlyLogAnnalist(withTag: "somelog")
     
     let healthStore: HKHealthStore
     let getIsProtectedDataAvailable: () async -> Bool
@@ -17,9 +16,13 @@ actor QuantityObserverQuery: ObserverQuery {
     var query: HKObserverQuery?
     var isFetchingData = false
     
+    var annalist: Annalist = OnlyLogAnnalist(withTag: "QuantityObserverQuery")
+    
     private let medsengerQuantityType: MedsengerQuantityType
     
-    init(medsengerQuantityType: MedsengerQuantityType, healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) {
+    init(medsengerQuantityType: MedsengerQuantityType,
+         healthStore: HKHealthStore,
+         getIsProtectedDataAvailable: @escaping () async -> Bool) {
         self.medsengerQuantityType = medsengerQuantityType
         self.healthStore = healthStore
         self.getIsProtectedDataAvailable = getIsProtectedDataAvailable
@@ -37,13 +40,13 @@ actor QuantityObserverQuery: ObserverQuery {
         guard lock() else { return }
         defer { unlock() }
         
-        guard let startDate = UserDefaults.getLastSyncDate(for: sampleIdentifier) else {
+        guard let startDate = await UserDefaults.getLastSyncDate(for: sampleIdentifier) else {
             annalist.log(.error, "fetchSamples: failed to get start date")
             return
         }
         
         do {
-            let now = Date()
+            let now = Date().toLocalTime()
             try await QuantityHealthQuery(medsengerQuantityType: medsengerQuantityType, withStart: startDate)
                 .getSamples(healthStore: healthStore)
                 .submit()

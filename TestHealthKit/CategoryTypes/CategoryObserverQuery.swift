@@ -1,15 +1,14 @@
 //
 //  CategoryObserverQuery.swift
-//  TestHealthKit
+//
 //
 //  Created by Tikhon Petrishchev on 05.02.2024.
 //
 
 import HealthKit
 
+@available(macOS 13.0, *)
 actor CategoryObserverQuery: ObserverQuery {
-    
-    var annalist: Annalist = OnlyLogAnnalist(withTag: "somelog")
     
     let healthStore: HKHealthStore
     let getIsProtectedDataAvailable: () async -> Bool
@@ -17,9 +16,13 @@ actor CategoryObserverQuery: ObserverQuery {
     var query: HKObserverQuery?
     var isFetchingData = false
     
+    var annalist: Annalist = OnlyLogAnnalist(withTag: "CategoryObserverQuery")
+    
     private let medsengerCategoryType: MedsengerCategoryType
     
-    init(medsengerCategoryType: MedsengerCategoryType, healthStore: HKHealthStore, getIsProtectedDataAvailable: @escaping () async -> Bool) {
+    init(medsengerCategoryType: MedsengerCategoryType,
+         healthStore: HKHealthStore,
+         getIsProtectedDataAvailable: @escaping () async -> Bool) {
         self.medsengerCategoryType = medsengerCategoryType
         self.healthStore = healthStore
         self.getIsProtectedDataAvailable = getIsProtectedDataAvailable
@@ -49,7 +52,8 @@ actor CategoryObserverQuery: ObserverQuery {
         
         do {
             var newAnchor: HKQueryAnchor?
-            try await CategoryHealthQuery(medsengerCategoryType: medsengerCategoryType, anchor: anchorData) { newAnchor = $0 }
+            try await CategoryHealthQuery(medsengerCategoryType: medsengerCategoryType,
+                                          anchor: anchorData) { newAnchor = $0 }
                 .getSamples(healthStore: healthStore)
                 .submit()
             if let newAnchor {
