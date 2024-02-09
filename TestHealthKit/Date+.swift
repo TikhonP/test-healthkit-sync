@@ -9,14 +9,10 @@ import Foundation
 
 extension Date {
     
-    static var twoWeeksAgo: Date? {
-        Calendar.current.date(byAdding: .day, value: -14, to: Date())
-    }
-    
-    static func getMedsengerLastSyncDate() async -> Date? {
-        guard let twoWeeksAgo = Date.twoWeeksAgo else {
-            return nil
-        }
+    /// Get health store last sync `Date` value from medsenger server in local timezone.
+    /// But no older than two weeks ago.
+    static func getMedsengerLastSyncDate() async -> Date {
+        let twoWeeksAgo = Calendar.current.date(byAdding: .day, value: -14, to: Date()) ?? Date()
         
 //        guard let lastHealthSyncDateTime = defaultDate else {
 //            return twoWeeksAgo

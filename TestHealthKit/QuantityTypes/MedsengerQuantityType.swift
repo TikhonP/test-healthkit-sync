@@ -7,7 +7,7 @@
 
 import HealthKit
 
-/// Object for configuring HealthKit quantity types
+/// Object for configuring HealthKit quantity types.
 @available(macOS 13.0, *)
 public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
     
@@ -20,12 +20,11 @@ public struct MedsengerQuantityType: Sendable, MedsengerHealthType {
     let byIntervals: DateComponents
     public let updateFrequency: HKUpdateFrequency
     
-    /// Create object for retrieving types for Medsenger
+    /// Creates `MedsengerQuantityType` value for retrieving types for Medsenger.
     /// - Parameters:
     ///   - identifier: HK identifier.
     ///   - hkUnit: HK unit to send to medsenger.
     ///   - medsengerKey: Medsenger server type's string key.
-    ///   - aggregationStrategy: Strategy for aggregation lots of hk samples.
     ///   - byIntervals: The date components that define the time interval for each statistics object in the collection.
     ///   - updateFrequency: The maximum frequency of the updates. The system wakes your app from the background
     ///                      at most once per time period specified.

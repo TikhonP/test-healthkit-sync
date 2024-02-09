@@ -7,6 +7,9 @@
 
 import HealthKit
 
+/// Quantity health query offers async interface API for query
+/// quantity type samples statistic calculated on all health store samples
+/// by intervals provided in ``HealthKitRecord``.
 @available(macOS 13.0, *)
 class QuantityHealthQuery {
     
@@ -16,12 +19,19 @@ class QuantityHealthQuery {
     private let medsengerQuantityType: MedsengerQuantityType
     private let startDate: Date
     
+    /// Creates a `QuantityHealthQuery` based on `MedsengerQuantityType` and filtering samples which start date newer that provided date value.
+    /// - Parameters:
+    ///   - medsengerQuantityType: Sample metadata value.
+    ///   - withStart: Lower time limit for samples date.
     init(medsengerQuantityType: MedsengerQuantityType, withStart: Date) {
         self.medsengerQuantityType = medsengerQuantityType
         self.quantityType = medsengerQuantityType.hkQuantityType
         self.startDate = withStart
     }
     
+    /// Fetch samples.
+    /// - Parameter healthStore: Health store for samples query executing.
+    /// - Returns: `HealthKitRecord` objects ready for `JSON` encoding and sending to server.
     func getSamples(healthStore: HKHealthStore) async throws -> [HealthKitRecord] {
         return try await withCheckedThrowingContinuation { continuation in
             self.continuation = continuation
@@ -49,10 +59,14 @@ class QuantityHealthQuery {
         }
         
         let datePredicate = HKQuery.predicateForSamples(withStart: startDate, end: now)
+        
+        // Filter samples that added by other Medsenger apps 
+        // but sync using different methods
         let allowedSamplesPredicate = NSCompoundPredicate(
             notPredicateWithSubpredicate: HKQuery.predicateForObjects(
                 withMetadataKey: medsengerParseNotAllowedMetadataKey)
         )
+        
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [datePredicate, allowedSamplesPredicate])
         
         let query = HKStatisticsCollectionQuery(
@@ -87,7 +101,7 @@ class QuantityHealthQuery {
 }
 
 @available(macOS 13.0, *)
-extension HKStatistics {
+private extension HKStatistics {
     func asHealthKitRecord(medsengerQuantityType: MedsengerQuantityType) -> HealthKitRecord? {
         switch self.quantityType.aggregationStyle {
         case .cumulative:
@@ -95,8 +109,7 @@ extension HKStatistics {
                 return HealthKitRecord(
                     quantity: quantity,
                     date: self.startDate,
-                    medsengerQuantityType: medsengerQuantityType,
-                    sources: self.sources
+                    medsengerQuantityType: medsengerQuantityType
                 )
             }
         case .discreteArithmetic, .discrete, .discreteTemporallyWeighted, .discreteEquivalentContinuousLevel:
@@ -104,8 +117,7 @@ extension HKStatistics {
                 return HealthKitRecord(
                     quantity: quantity,
                     date: self.startDate,
-                    medsengerQuantityType: medsengerQuantityType,
-                    sources: self.sources
+                    medsengerQuantityType: medsengerQuantityType
                 )
             }
         default:
@@ -116,7 +128,7 @@ extension HKStatistics {
 }
 
 @available(macOS 13.0, *)
-extension HKQuantityAggregationStyle {
+private extension HKQuantityAggregationStyle {
     func asStatisticsOptions() -> HKStatisticsOptions {
         switch self {
         case .cumulative:
@@ -129,7 +141,9 @@ extension HKQuantityAggregationStyle {
     }
 }
 
-enum QuantityHealthQueryError: LocalizedError {
-    case resultsIsNil
-    case unableToCreateAnchorDate
+private enum QuantityHealthQueryError: String, LocalizedError {
+    case resultsIsNil = "Collection statistic query got nil results collection."
+    case unableToCreateAnchorDate = "Failed to create anchor date using calendar.nextDate."
+    
+    var errorDescription: String? { rawValue }
 }

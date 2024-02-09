@@ -27,7 +27,7 @@ struct HealthKitRecord: Encodable {
 extension HealthKitRecord {
     
     /// Init for MedsengerQuantityQuery.
-    init(quantity: HKQuantity, date: Date, medsengerQuantityType: MedsengerQuantityType, sources: [HKSource]?) {
+    init(quantity: HKQuantity, date: Date, medsengerQuantityType: MedsengerQuantityType) {
         self.categoryName = medsengerQuantityType.medsengerKey
         self.time = date
         let value = quantity.doubleValue(for: medsengerQuantityType.hkUnit)

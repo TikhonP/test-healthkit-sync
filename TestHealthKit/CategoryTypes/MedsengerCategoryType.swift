@@ -7,19 +7,21 @@
 
 import HealthKit
 
-public typealias DataEncoder = @Sendable (Int) -> String?
-
-/// Object for configuring HealthKit category types
+/// Object for configuring HealthKit category types.
 @available(macOS 13.0, *)
 public struct MedsengerCategoryType: Sendable, MedsengerHealthType {
+    
+    public typealias DataEncoder = @Sendable (Int) -> String?
     
     let hkCategoryType: HKCategoryType
     let medsengerKey: String
     let dataEncoder: DataEncoder
     public let updateFrequency: HKUpdateFrequency
     
-    public init?(_ identifier: HKCategoryTypeIdentifier, medsengerKey: String,
-                 updateFrequency: HKUpdateFrequency = .immediate, dataEncoder: @escaping DataEncoder) {
+    public init?(_ identifier: HKCategoryTypeIdentifier, 
+                 medsengerKey: String,
+                 updateFrequency: HKUpdateFrequency = .immediate, 
+                 dataEncoder: @escaping DataEncoder) {
         guard let categoryType = HKObjectType.categoryType(forIdentifier: identifier) else {
             return nil
         }

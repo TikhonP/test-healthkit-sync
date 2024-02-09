@@ -7,6 +7,7 @@
 
 import HealthKit
 
+/// Observe changes and fetch category type samples using simple async API.
 @available(macOS 13.0, *)
 actor CategoryObserverQuery: ObserverQuery {
     
@@ -37,17 +38,19 @@ actor CategoryObserverQuery: ObserverQuery {
     }
     
     func fetchSamples() async {
+        
+        // Lock fetching for excluding situation where there are two fetch request
+        // in the same time but last sync date anchor was not updated and samples are duplicated.
         guard lock() else { return }
         defer { unlock() }
         
-        let anchorData: AnchorData
+        let anchorData: CategoryHealthQuery.AnchorData
         if let anchor = UserDefaults.getQueryAnchor(for: sampleIdentifier) {
             anchorData = .anchor(anchor)
         } else {
-            guard let startDate = await Date.getMedsengerLastSyncDate() else {
-                return
-            }
-            anchorData = .startDate(startDate)
+            anchorData = .startDate(
+                await Date.getMedsengerLastSyncDate()
+            )
         }
         
         do {
@@ -56,12 +59,15 @@ actor CategoryObserverQuery: ObserverQuery {
                                           anchor: anchorData) { newAnchor = $0 }
                 .getSamples(healthStore: healthStore)
                 .submit()
+            
+            // Saving anchor only after submit to be sure there was no errors
             if let newAnchor {
                 try UserDefaults.setQueryAnchor(for: sampleIdentifier, anchor: newAnchor)
             }
-            annalist.log(.info, "HealthKitSync fetched \(sampleIdentifier)")
+            
+            annalist.log(.info, "Health fetched \(sampleIdentifier)")
         } catch {
-            error.healthHandle("fetchSamples \(sampleIdentifier)", using: annalist)
+            error.healthHandle("Fetch \(sampleIdentifier)", using: annalist)
         }
     }
 }
